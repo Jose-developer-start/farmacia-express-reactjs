@@ -3,13 +3,21 @@ import connect from "../config/dbConnect.js"
 export const VentaController = {
     getVenta: (req,res)=>{
         connect.query("SELECT * FROM venta", (err,result)=>{
-            res.status(200).json(result)
+            res.status(200).json({
+                "autor": "@",
+                "versión": "1.0.0",
+                "body": result
+            })
         })
     },
     getVentaById: (req,res)=>{
         const {id} = req.params
         connect.query("SELECT * FROM venta WHERE id=?",id, (err,result)=>{
-            res.status(200).json(result)
+            res.status(200).json({
+                "autor": "@",
+                "versión": "1.0.0",
+                "body": result
+            })
         })
     },
     storeVenta: (req,res)=>{
@@ -44,7 +52,9 @@ export const VentaController = {
         try{
             const {id} = req.params
             connect.query("DELETE FROM venta WHERE id=?",id, (err,result)=>{
-                res.json(result)
+                res.json({
+                    "status": "deleted"
+                })
             })
         }catch{
             res.status(500).json({

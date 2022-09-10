@@ -2,13 +2,21 @@ import connect from "../config/dbConnect.js"
 export const ClienteController = {
     getCliente: (req,res)=>{
         connect.query("SELECT * FROM cliente", (err,result)=>{
-            res.status(200).json(result)
+            res.status(200).json({
+                "autor": "@",
+                "versión": "1.0.0",
+                "body": result
+            })
         })
     },
     getClienteById: (req,res)=>{
         const {id} = req.params
         connect.query("SELECT * FROM cliente WHERE id=?",id, (err,result)=>{
-            res.status(200).json(result)
+            res.status(200).json({
+                "autor": "@",
+                "versión": "1.0.0",
+                "body": result
+            })
         })
     },
     storeCliente: (req,res)=>{
@@ -43,7 +51,9 @@ export const ClienteController = {
         try{
             const {id} = req.params
             connect.query("DELETE FROM cliente WHERE id=?",id, (err,result)=>{
-                res.json(result)
+                res.json({
+                    "status": "deleted data"
+                })
             })
         }catch{
             res.status(500).json({
