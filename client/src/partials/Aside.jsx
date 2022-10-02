@@ -18,6 +18,8 @@ export default function Aside() {
 
         <li className="treeview"><Link className="app-menu__item" to={"/categorias"} data-toggle="treeview"><i className="app-menu__icon fa fa-users"></i><span className="app-menu__label">Categorias</span><i className="treeview-indicator fa fa-angle-right"></i></Link>
         </li>
+        <li className="treeview"><Link className="app-menu__item" to={"/productos"} data-toggle="treeview"><i className="app-menu__icon fa fa-users"></i><span className="app-menu__label">Productos</span><i className="treeview-indicator fa fa-angle-right"></i></Link>
+        </li>
       </ul>
     </aside>
   )
