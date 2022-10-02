@@ -23,12 +23,17 @@ export const CategoriaController = {
         try{
             const {id} = req.params
             connect.query("SELECT * FROM categoria WHERE id=?",id, (err,result)=>{
-                res.json(result)
+                res.json({
+                    "autor": "@",
+                    "versión": "1.0.0",
+                    "body": result
+                })
             })
         }catch{
             res.status(500).json({
                 "status": "error server"
             })
+            
         }
     },storeCategoria: (req,res)=>{
         connect.query("INSERT INTO categoria set ?",req.body, (err,result)=>{
