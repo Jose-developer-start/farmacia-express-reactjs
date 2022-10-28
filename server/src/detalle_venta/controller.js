@@ -11,7 +11,7 @@ export const detalleVentaController = {
     },
     getDetalleVentaById: (req,res)=>{
         const {id} = req.params
-        connect.query("SELECT * FROM detalle_venta WHERE id=?",id, (err,result)=>{
+        connect.query("SELECT venta.id,producto.id,cliente.nombre,cliente.apellido,producto.producto,producto.descripcion,venta.fecha_venta,venta.total_pago,producto.precio_venta,venta.descuento FROM `detalle_venta` INNER JOIN producto ON detalle_venta.producto_id=producto.id INNER JOIN venta ON detalle_venta.venta_id=venta.id INNER JOIN cliente ON venta.cliente_id=cliente.id WHERE venta.id=?",id, (err,result)=>{
             res.status(200).json({
                 "autor": "@",
                 "versión": "1.0.0",

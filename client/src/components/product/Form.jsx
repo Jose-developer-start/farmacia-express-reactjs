@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { productAPI } from '../../api/product'
+import {useForm} from "react-hook-form"
 
 let objProduct = {
     producto: '',
@@ -17,57 +18,41 @@ let objProduct = {
 export default function Form() {
 
     const [product,setProduct] = useState(objProduct)
+    const {register,handleSubmit} = useForm()
 
-    const onChange = (e)=>{
-        let newProduct = {
-            [e.target.name] : e.target.value,
-            [e.target.name] : e.target.value,
-            [e.target.name] : e.target.value,
-            [e.target.name] : e.target.value,
-            [e.target.name] : e.target.value,
-            [e.target.name] : e.target.value,
-            [e.target.name] : e.target.value,
-            [e.target.name] : e.target.value,
-            [e.target.name] : e.target.value
-        }
-        setProduct({...product,...newProduct})
-    }
-
-    const onSubmit = (e) =>{
-        e.preventDefault();
-        const result = productAPI.storeProduct(product)
-        setProduct(objProduct)
-        console.log('Guardado')
+    const onSubmit = (data) =>{
+        const result = productAPI.storeProduct(data)
+        //console.log(data)
     }
     return (
         <div className="card p-3">
-            <form action="" method='POST' onSubmit={(e) => onSubmit(e)} encType="multipart/form-data">
+            <form action="" method='POST' onSubmit={handleSubmit(onSubmit)} enctype="multipart/form-data">
                 <div className="row">
                     <div className="col-sm-12 col-md-6 mb-3">
                         <div className="form-group">
                             <label htmlFor="">Producto: </label>
-                            <input onChange={(e) => onChange(e)} type="text" value={product.producto}  name='producto' className='form-control' />
+                            <input  type="text" {...register('producto', { required: true })}  name='producto' className='form-control' />
                         </div>
 
                         <div className="form-group">
                             <label htmlFor="">Descripción: </label>
-                            <textarea onChange={(e) => onChange(e)} type="text" value={product.descripcion} name='descripcion' className='form-control' />
+                            <textarea  {...register('descripcion', { required: true })} type="text" name='descripcion' className='form-control' />
                         </div>
 
 
                         <div className="form-group">
                             <label htmlFor="">Precio de compra: </label>
-                            <input onChange={(e) => onChange(e)} type="number" min={0} value={product.precio_compra} name='precio_compra' className='form-control' />
+                            <input  type="number" min={0}  name='precio_compra' className='form-control' />
                         </div>
 
                         <div className="form-group">
                             <label htmlFor="">Precio de venta: </label>
-                            <input onChange={(e) => onChange(e)} type="number" value={product.precio_venta} name='precio_venta' className='form-control' />
+                            <input  type="number" {...register('precio_venta', { required: true })} name='precio_venta' className='form-control' />
                         </div>
 
                         <div className="form-group">
                             <label htmlFor="">Unidad de medida: </label>
-                            <select onChange={(e) => onChange(e)} name="unidad_medida" id="" className='form-control'>
+                            <select  name="unidad_medida" {...register('unidad_medida', { required: true })} className='form-control'>
                                 <option value="" selected>Selec. Medidad</option>
                                 <option value="miligramos">Miligramos</option>
                             </select>
@@ -76,22 +61,22 @@ export default function Form() {
                     <div className="col-sm-12 col-md-6 mb-3">
                         <div className="form-group">
                             <label htmlFor="">Fecha de vencimiento: </label>
-                            <input onChange={(e) => onChange(e)} type="date" value={product.fecha_vencimiento} name='fecha_vencimiento' className='form-control' />
+                            <input  type="date" {...register('fecha_vencimiento', { required: true })} name='fecha_vencimiento' className='form-control' />
                         </div>
                         <div className="form-group">
                             <label htmlFor="">Imagen: </label>
-                            <input onChange={(e) => onChange(e)} type="file" value={product.imagen_producto} name='imagen_producto' className='form-control' />
+                            <input  type="file" {...register('imagen_producto', { required: true })} name='imagen_producto' className='form-control' />
                         </div>
                         <div className="form-group">
                             <label htmlFor="">Stock: </label>
-                            <input onChange={(e) => onChange(e)} type="number" min={0} value={product.stock} name='stock' className='form-control' />
+                            <input  type="number" min={0} {...register('stock', { required: true })} name='stock' className='form-control' />
                         </div>
 
                         <div className="form-group">
                             <label htmlFor="">Categoria: </label>
-                            <select onChange={(e) => onChange(e)} name="categoria_id" id="" className='form-control'>
+                            <select  name="categoria_id" {...register('categoria_id', { required: true })} className='form-control'>
                                 <option value="" selected>Selec. Categoria</option>
-                                <option value="miligramos">Miligramos</option>
+                                <option value="1">Medicamentos</option>
                             </select>
                         </div>
 

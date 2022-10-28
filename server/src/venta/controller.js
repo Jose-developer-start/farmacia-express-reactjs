@@ -2,7 +2,7 @@ import connect from "../config/dbConnect.js"
 
 export const VentaController = {
     getVenta: (req,res)=>{
-        connect.query("SELECT * FROM venta", (err,result)=>{
+        connect.query("SELECT venta.id,venta.fecha_venta,venta.total_pago,venta.descuento,cliente.nombre AS clienteNombre,cliente.apellido AS clienteApellido,usuario.nombre AS userNombre,usuario.apellido AS userApellido FROM `venta`INNER JOIN cliente ON venta.cliente_id=cliente.id INNER JOIN usuario ON venta.usuario_id=usuario.id", (err,result)=>{
             res.status(200).json({
                 "autor": "@",
                 "versión": "1.0.0",
@@ -25,7 +25,8 @@ export const VentaController = {
 
             connect.query("INSERT INTO venta set ?",req.body, (err,result)=>{
                 res.status(201).json({
-                    "status":"inserted data"
+                    "status":"inserted data",
+                    "insertId": result.insertId 
                 })
             })
         }catch{

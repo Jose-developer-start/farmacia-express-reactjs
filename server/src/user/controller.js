@@ -11,7 +11,7 @@ export const UserController = {
     },
     getUserById: (req,res)=>{
         const {id} = req.params
-        connect.query("SELECT * FROM usuario WHERE id=?",id, (err,result)=>{
+        connect.query("SELECT * FROM usuario WHERE email=?",id, (err,result)=>{
             res.status(200).json({
                 "autor": "@",
                 "versión": "1.0.0",

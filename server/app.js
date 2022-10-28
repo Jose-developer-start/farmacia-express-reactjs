@@ -1,7 +1,14 @@
 import express from "express"
 import morgan from "morgan"
 import cors from "cors"
+//Subidad de archivos
+import fileUpload from "express-fileupload"
+//Path directory
+import {join,dirname} from "path"
+import {fileURLToPath} from "url"
 
+const __path = dirname(fileURLToPath(import.meta.url))
+console.log(__path)
 //Import routas web API
 import { UserRouter } from "./src/user/route.js"
 import { CategoriaRouter } from "./src/categoria/route.js"
@@ -15,12 +22,19 @@ import { detallerVentaRouter } from "./src/detalle_venta/route.js"
 
 //App initial
 const app = express()
+//Config
 
 //Middleware
 app.use(morgan('dev'))
+app.use(express.urlencoded({extended:false}));
 app.use(express.json())
 app.use(cors({origin: "*"}))
-//Config
+
+app.use(fileUpload({
+    useTempFiles : true,
+    tempFileDir : '/tmp/'
+}));
+
 
 //Routas
 UserRouter(app)

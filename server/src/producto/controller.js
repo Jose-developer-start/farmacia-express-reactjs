@@ -1,4 +1,9 @@
 import connect from "../config/dbConnect.js"
+//Path directory
+import {join,dirname} from "path"
+import {fileURLToPath} from "url"
+
+const __path = join(dirname(fileURLToPath(import.meta.url)),'../public')
 export const ProductoController = {
     getProducto: (req,res)=>{
         connect.query("SELECT * FROM producto", (err,result)=>{
@@ -20,8 +25,15 @@ export const ProductoController = {
         })
     },
     storeProducto: (req,res)=>{
+        //console.log(req.body)
+        /* imgProduct.mv(`${__path}/${imgProduct.name}`,err => {
+                if(err) return res.status(500).send({ message : err })
+        
+                return res.status(200).send({ message : 'File upload' })
+            })*/
         try{
-
+            
+            
             connect.query("INSERT INTO producto set ?",req.body, (err,result)=>{
                 res.status(201).json({
                     "status":"inserted data"

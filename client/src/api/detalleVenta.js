@@ -1,5 +1,5 @@
-let URL = 'http://localhost:5000/api/productos/';
-export const productAPI = {
+let URL = 'http://localhost:5000/api/detalle-ventas/';
+export const ventaDetalleAPI = {
     getProduct : async ()=>{
         const res = await fetch(URL)
         return await res.json()

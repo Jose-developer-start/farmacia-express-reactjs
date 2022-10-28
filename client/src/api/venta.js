@@ -1,25 +1,24 @@
-let URL = 'http://localhost:5000/api/productos/';
-export const productAPI = {
-    getProduct : async ()=>{
+let URL = 'http://localhost:5000/api/ventas/';
+export const ventasAPI = {
+    getVenta : async ()=>{
         const res = await fetch(URL)
         return await res.json()
     },
-    getProductById: async (id)=>{
+    getVentaById: async (id)=>{
         const res = await fetch(URL + id)
         return await res.json()
     },
-    storeProduct: async (data)=>{
-        const res = await window.fetch(URL,{
+    storeVenta: async (data)=>{
+        const res = await fetch(URL,{
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
-                'Connection': 'keep-alive',
                 'Content-Type': 'application/json'
             }
         })
         return await res.json()
     },
-    updateProduct: async (id,data)=>{
+    updateVenta: async (id,data)=>{
         const res = await fetch(URL + id,{
             method: 'PUT',
             body: JSON.stringify(data),
@@ -29,7 +28,7 @@ export const productAPI = {
         })
         return await res.json()
     },
-    deleteProduct: async (id)=>{
+    deleteVenta: async (id)=>{
         const res = await fetch(URL + id,{
             method: 'DELETE',
             headers: {

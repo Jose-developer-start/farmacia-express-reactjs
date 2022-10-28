@@ -1,11 +1,19 @@
 import React from 'react'
+import { useEffect } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 export default function Aside() {
+  const [user,setUser] = useState({})
+
+  useEffect(()=>{
+    setUser(JSON.parse(sessionStorage.getItem('AuthUser')))
+    console.log(user)
+  },[])
   return (
     <aside className="app-sidebar">
       <div className="app-sidebar__user"><img className="app-sidebar__user-avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" alt="User Image" />
         <div>
-          <p className="app-sidebar__user-name">John Doe</p>
+          <p className="app-sidebar__user-name">{user.nombre}</p>
           <p className="app-sidebar__user-designation">Administrador</p>
         </div>
       </div>
@@ -19,6 +27,8 @@ export default function Aside() {
         <li className="treeview"><Link className="app-menu__item" to={"/categorias"} data-toggle="treeview"><i className="app-menu__icon fa fa-users"></i><span className="app-menu__label">Categorias</span><i className="treeview-indicator fa fa-angle-right"></i></Link>
         </li>
         <li className="treeview"><Link className="app-menu__item" to={"/productos"} data-toggle="treeview"><i className="app-menu__icon fa fa-users"></i><span className="app-menu__label">Productos</span><i className="treeview-indicator fa fa-angle-right"></i></Link>
+        </li>
+        <li className="treeview"><Link className="app-menu__item" to={"/ventas"} data-toggle="treeview"><i className="app-menu__icon fa fa-users"></i><span className="app-menu__label">Ventas</span><i className="treeview-indicator fa fa-angle-right"></i></Link>
         </li>
       </ul>
     </aside>
