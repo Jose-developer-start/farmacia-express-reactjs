@@ -44,4 +44,8 @@ ProductoRouter(app)
 VentaRouter(app)
 detallerVentaRouter(app)
 //Server running lister
-app.listen(config.PORT, ()=>console.log('Server on port: ' + config.PORT))
+
+app.set('port',process.env.PORT || 5000);
+app.listen(app.get('port'), () => {
+    console.log("The server is running in port || localhost:",app.get('port'));
+});

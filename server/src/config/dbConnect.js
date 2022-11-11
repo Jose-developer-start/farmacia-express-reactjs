@@ -11,7 +11,7 @@ const connect = mysq.createConnection({
 
 connect.connect((err)=>{
     if(err) console.log(err)
-    console.log('Connectado')
+    console.log('Database is connected in port || localhost:3306')
 })
 
 export default connect
